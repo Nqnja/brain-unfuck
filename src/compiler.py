@@ -18,7 +18,7 @@ class Instruction:
 def read_file(path: str) -> Instruction:
     contents = ""
     with open(path, mode='r') as file:
-        contents = file.read().replace('\n', ' ')
+        contents = file.read().replace('\n', ' ').replace('\t', '')
 
     split = re.split(r"[.\\\/]", path)
     extension = split[-1].lower()
@@ -65,7 +65,7 @@ def build_instruction_set(dependency_paths: list[str]) -> dict[str, str]:
     while len(todo) > 0:
         for instr in todo:
             local_instructions = instr.instructions
-            
+
             todo_identifiers = [i.identifier for i in todo]
 
             if instr in todo_identifiers:
@@ -98,4 +98,21 @@ def compile_brain_unfuck(program_path: str, dependency_paths: list[str] = ['./in
 
     instr_identifier = re.split(r"[.\\\/]", program_path)[-2]
 
-    return instruction_set[instr_identifier].replace(' ', '')
+    code = instruction_set[instr_identifier].replace(' ', '')
+    original_code = code
+
+    previous_length = 0
+    while len(code) != previous_length:
+        previous_length = len(code)
+
+        code = code \
+            .replace('<>', '') \
+            .replace('><', '') \
+            .replace('+-', '') \
+            .replace('-+', '') \
+            .replace('[[+]]', '[+]') \
+            .replace('[[-]]', '[-]')
+    
+    print(f"Optimized program length {len(original_code)} -> {len(code)} (-{round(100 - len(code) / len(original_code) * 100, 1)}%)")
+
+    return code

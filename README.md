@@ -11,7 +11,7 @@ I am sure other people will be able to make much cooler stuff using this base, s
 ## How to use brain unfuck
 Literally just create a text file ending in `.bu`, then run `py ./main.py <your_file_name>` and you should be good to go. Running just `py ./main.py` will help you setting up custom brain unfuck instruction mappings you made, you're free to deviate from my own instruction set.
 
-In order to view and share your created brainfuck program, simply take a look at the `./out.bf` file that was created in this folder after you run `main.py`.
+In order to view and share your created brainfuck program, simply take a look at the `./output.bf` file that was created in this folder after you run `main.py`.
 
 Yes, I currently depend on python, because I was mostly interested in creating the mappings between brain unfuck keywords and brainfuck instructions. I might sometime implement an actual compiler in a lower level language, but I think that's out of scope for now.
 

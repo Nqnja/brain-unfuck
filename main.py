@@ -44,7 +44,7 @@ def main(*args):
         program = compile_brain_unfuck(program_path, dependency_paths)
         print(f"Compiled to brainfuck program of length {len(program)}")
 
-        print("Writing output program to file 'out.bf'..")
+        print("Writing output program to file 'output.bf'..")
         pretty_out_write(program)
     else:
         with open(program_path, 'r') as file:
